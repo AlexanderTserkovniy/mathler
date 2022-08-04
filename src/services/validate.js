@@ -2,7 +2,7 @@
 /**
  * @description EVIL `eval` approach for now, but that is fast and working
  *  solution to validate
- * @param equation {String} some equation or its absence, but in a string format
+ * @param equation {string} some equation or its absence, but in a string format
  */
 const validate = (equation) => {
   let result;

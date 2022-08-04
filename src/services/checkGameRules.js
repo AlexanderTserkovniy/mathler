@@ -9,8 +9,8 @@ const validator = {
 /**
  *
  * @param difficulty {"normal" | "killA"} – exact difficulty
- * @param equation {String} – validated equation string
- * @returns {Boolean} – if all the existing game rules are valid
+ * @param equation {string} – validated equation string
+ * @returns {boolean} – if all the existing game rules are valid
  */
 export const checkGameRules = (difficulty, equation) => {
   const rules = rulesJson.difficulties[difficulty];
