@@ -3,7 +3,6 @@
  * kemperomg@gmail.com
  */
 
-//
-const calculate = () => {};
+const calculate = (str) => {};
 
 export default calculate;

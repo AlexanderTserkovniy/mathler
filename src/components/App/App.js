@@ -1,23 +1,20 @@
 import logo from "../../logo.svg";
 import "./App.scss";
+import calculate from "../../services/calculate";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header" title="This project uses React.js">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1 className="App-name">Mathler</h1>
       </header>
+      <article className="App-body">
+        <p>Hardcoded example:</p>
+        <code>10/2+9</code>
+        <p>result:</p>
+        <code>{calculate("10/2+9")}</code>
+      </article>
     </div>
   );
 }
