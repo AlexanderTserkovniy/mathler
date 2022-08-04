@@ -3,6 +3,9 @@
  * kemperomg@gmail.com
  */
 
+import catcher from "./catcher";
+import validate from "./validate";
+
 /**
  * @description – Main function which does calculation of the equation and
  *  returns result or error
@@ -11,6 +14,10 @@
  * @returns {Number|Error} – if equation is correct returns number, if it is not
  *  returns an Error
  */
-const calculate = (equation) => {};
+const calculate = (equation) => {
+  if (catcher(() => validate(equation)) === false) {
+    throw new Error("Incorrect equation");
+  }
+};
 
 export default calculate;
