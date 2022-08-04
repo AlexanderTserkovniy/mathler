@@ -1,0 +1,14 @@
+{
+  "difficulties": {
+    "normal": {
+      "length": 6,
+      "operators": 2,
+      "enableHighlight": true
+    },
+    "killA": {
+      "length": 8,
+      "operators": 3,
+      "enableHighlight": false
+    }
+  }
+}
