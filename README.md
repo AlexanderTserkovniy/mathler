@@ -4,6 +4,7 @@ This section could be the last one, but you might have missed it, so I want to s
 
 - You will often see `smth === false` as opposite to `!smth` that's because I believe that we write code for people not for machines, thus, it is much easier to understand when something is `false` rather than keeping in mind that starting from this point (`!`) everything ahead is _falsy_ so that you should process things in your head rather than on machine. Also, this way you avoid such things like `!isNotAuthorized` which forces you to wake up at night with a nightmare because you might miss-coded some part due to too many negatives;
 - Some constants/configs could be done via `Symbol` in order to make it 100% unique and non-repeatable, but I believe in a simplicity, so I tend to follow `.json` and just strings with UPPERCASE names;
+- I am using https://commitlint.js.org/ approach for naming the commits
 
 # Mathler
 
