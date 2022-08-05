@@ -9,7 +9,7 @@ import { checkGameRules } from "./checkGameRules";
 import normalize from "./normalize";
 import fromStringToNumberOperatorArray from "./fromStringToNumberOperatorArray";
 import fromStringToNumber from "./fromStringToNumber";
-import calculateDivisionOrMultiplication from "./calculateDivisionOrMultiplication";
+import calculateDivisionAndMultiplication from "./calculateDivisionAndMultiplication";
 
 // TODO Make it choosable
 const DIFFICULTY = "normal";
@@ -42,7 +42,7 @@ const calculate = (rawEquation) => {
   );
 
   const equationWithCalculatedDivisionAndMultiplication =
-    calculateDivisionOrMultiplication(equationArrayWithNumbers);
+    calculateDivisionAndMultiplication(equationArrayWithNumbers);
 
   return "MUST FAIL! NOT IMPLEMENTED!";
 };

@@ -1,63 +1,63 @@
-import calculateDivisionOrMultiplication from "./calculateDivisionOrMultiplication";
+import calculateDivisionAndMultiplication from "./calculateDivisionAndMultiplication";
 
-describe("`calculateDivisionOrMultiplication` function should receive an array of numbers and operators represented as strings and invoke multiplication and division returning new array", () => {
+describe("`calculateDivisionAndMultiplication` function should receive an array of numbers and operators represented as strings and invoke multiplication and division returning new array", () => {
   test("calculates multiplication properly", () => {
-    expect(calculateDivisionOrMultiplication([20, "*", 3, "*", 2])).toEqual([
+    expect(calculateDivisionAndMultiplication([20, "*", 3, "*", 2])).toEqual([
       120,
     ]);
     expect(
-      calculateDivisionOrMultiplication([1, "*", 1, "*", 3, "*", 1])
+      calculateDivisionAndMultiplication([1, "*", 1, "*", 3, "*", 1])
     ).toEqual([3]);
   });
 
   test("calculates multiplication in proper order and does not touch other operators", () => {
-    expect(calculateDivisionOrMultiplication([17, "-", 3, "*", 2])).toEqual([
+    expect(calculateDivisionAndMultiplication([17, "-", 3, "*", 2])).toEqual([
       17,
       "-",
       6,
     ]);
     expect(
-      calculateDivisionOrMultiplication([17, "-", 3, "*", 2, "+", 80])
+      calculateDivisionAndMultiplication([17, "-", 3, "*", 2, "+", 80])
     ).toEqual([17, "-", 6, "+", 80]);
     expect(
-      calculateDivisionOrMultiplication([21, "*", 5, "-", 100, "*", 5])
+      calculateDivisionAndMultiplication([21, "*", 5, "-", 100, "*", 5])
     ).toEqual([105, "-", 500]);
   });
 
   test("calculates division properly", () => {
-    expect(calculateDivisionOrMultiplication([18, "/", 6, "/", 3])).toEqual([
+    expect(calculateDivisionAndMultiplication([18, "/", 6, "/", 3])).toEqual([
       1,
     ]);
     expect(
-      calculateDivisionOrMultiplication([100, "/", 2, "/", 5, "/", 5])
+      calculateDivisionAndMultiplication([100, "/", 2, "/", 5, "/", 5])
     ).toEqual([2]);
   });
 
   test("calculates division in proper order and does not touch other operators", () => {
-    expect(calculateDivisionOrMultiplication([17, "-", 6, "/", 2])).toEqual([
+    expect(calculateDivisionAndMultiplication([17, "-", 6, "/", 2])).toEqual([
       17,
       "-",
       3,
     ]);
     expect(
-      calculateDivisionOrMultiplication([17, "-", 80, "/", 4, "+", 5])
+      calculateDivisionAndMultiplication([17, "-", 80, "/", 4, "+", 5])
     ).toEqual([17, "-", 20, "+", 5]);
     expect(
-      calculateDivisionOrMultiplication([40, "/", 5, "-", 100, "/", 5])
+      calculateDivisionAndMultiplication([40, "/", 5, "-", 100, "/", 5])
     ).toEqual([8, "-", 20]);
   });
 
   test("calculates division and multiplication in proper order and does not touch other operators", () => {
     expect(
-      calculateDivisionOrMultiplication([17, "*", 5, "+", 5, "/", 1])
+      calculateDivisionAndMultiplication([17, "*", 5, "+", 5, "/", 1])
     ).toEqual([85, "+", 5]);
     expect(
-      calculateDivisionOrMultiplication([17, "*", 5, "/", 5, "/", 4])
+      calculateDivisionAndMultiplication([17, "*", 5, "/", 5, "/", 4])
     ).toEqual([4.25]);
   });
 
   test('does nothing if there is no division "/" or multiplication "*"', () => {
-    expect(calculateDivisionOrMultiplication([2, "-", 4, "+", 5])).toEqual([
+    expect(calculateDivisionAndMultiplication([2, "-", 4, "+", 5])).toEqual([
       2,
       "-",
       4,
@@ -65,10 +65,10 @@ describe("`calculateDivisionOrMultiplication` function should receive an array o
       5,
     ]);
     expect(
-      calculateDivisionOrMultiplication([1238, "+", -31275, "-", -38615])
+      calculateDivisionAndMultiplication([1238, "+", -31275, "-", -38615])
     ).toEqual([1238, "+", -31275, "-", -38615]);
     expect(
-      calculateDivisionOrMultiplication([
+      calculateDivisionAndMultiplication([
         1238,
         "+",
         -31275,
@@ -80,8 +80,35 @@ describe("`calculateDivisionOrMultiplication` function should receive an array o
     ).toEqual([1238, "+", -31275, "-", -38615, "+", 986981]);
   });
 
-  test("returns new array", () => {
+  test("returns new array IF there is multiplication or division", () => {
+    const arr = [1238, "+", -31275, "-", -38615, "/", 986981];
+    expect(calculateDivisionAndMultiplication(arr)).toBeTruthy();
+    expect(calculateDivisionAndMultiplication(arr)).not.toBe(arr);
+  });
+
+  test("returns the same array IF there is NO any multiplication nor division", () => {
     const arr = [1238, "+", -31275, "-", -38615, "+", 986981];
-    expect(calculateDivisionOrMultiplication(arr)).not.toBe(arr);
+    expect(calculateDivisionAndMultiplication(arr)).toBeTruthy();
+    expect(calculateDivisionAndMultiplication(arr)).toBe(arr);
+  });
+
+  /*
+    Pay attention prior to this step, function awaits clear input. Normalization
+    and syntax check must be conducted earlier
+  */
+  test("should fail when equation is not correct syntax wise", () => {
+    expect(() => calculateDivisionAndMultiplication(["/", 12])).toThrow();
+    expect(() =>
+      calculateDivisionAndMultiplication([10, "/", 12, "*"])
+    ).toThrow();
+    expect(() =>
+      calculateDivisionAndMultiplication(["/", "/", 12, "*"])
+    ).toThrow();
+    expect(() => calculateDivisionAndMultiplication(["*", "/", 12])).toThrow();
+    expect(() => calculateDivisionAndMultiplication(["*", 12])).toThrow();
+    expect(() => calculateDivisionAndMultiplication(["*"])).toThrow();
+    expect(() => calculateDivisionAndMultiplication(["/"])).toThrow();
+    expect(() => calculateDivisionAndMultiplication([12, "/"])).toThrow();
+    expect(() => calculateDivisionAndMultiplication([10, "*"])).toThrow();
   });
 });
