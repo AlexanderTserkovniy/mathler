@@ -10,6 +10,7 @@ import normalize from "./normalize";
 import fromStringToNumberOperatorArray from "./fromStringToNumberOperatorArray";
 import fromStringToNumber from "./fromStringToNumber";
 import calculateDivisionAndMultiplication from "./calculateDivisionAndMultiplication";
+import calculateAdditionAndSubtraction from "./calculateAdditionAndSubtraction";
 
 // TODO Make it choosable
 const DIFFICULTY = "normal";
@@ -43,6 +44,11 @@ const calculate = (rawEquation) => {
 
   const equationWithCalculatedDivisionAndMultiplication =
     calculateDivisionAndMultiplication(equationArrayWithNumbers);
+
+  const equationWithCalculatedAdditionAndSubtraction =
+    calculateAdditionAndSubtraction(
+      equationWithCalculatedDivisionAndMultiplication
+    );
 
   return "MUST FAIL! NOT IMPLEMENTED!";
 };
