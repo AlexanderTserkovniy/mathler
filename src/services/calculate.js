@@ -8,6 +8,7 @@ import validate from "./validate";
 import { checkGameRules } from "./checkGameRules";
 import normalize from "./normalize";
 import fromStringToNumberOperatorArray from "./fromStringToNumberOperatorArray";
+import fromArrayToActualHandlers from "./fromArrayToActualHandlers";
 
 // TODO Make it choosable
 const DIFFICULTY = "normal";
@@ -34,6 +35,10 @@ const calculate = (rawEquation) => {
 
   const equationSeparatedForCalculation =
     fromStringToNumberOperatorArray(equation);
+
+  const equationArrayWithActualHandlers = fromArrayToActualHandlers(
+    equationSeparatedForCalculation
+  );
 
   return "MUST FAIL! NOT IMPLEMENTED!";
 };
