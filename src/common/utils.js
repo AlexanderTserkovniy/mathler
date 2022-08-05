@@ -5,7 +5,7 @@
  * kemperomg@gmail.com
  */
 
-/* checks whether it is division / or multiply * or addition + or - subtraction */
+/* checks whether it is division / or multiplication * or addition + or - subtraction */
 export const isOperator = (str) => /[/*+-]/.test(str);
 
 /* use `==` explicitly here */

@@ -1,7 +1,7 @@
 import fromStringToNumber from "./fromStringToNumber";
 
 // ["10", "/", "4", "*", "-4"]
-describe("`fromStringToNumber` function should prepare real numbers", () => {
+test("`fromStringToNumber` function should prepare real numbers", () => {
   expect(fromStringToNumber(["10", "/", "4", "*", "-4"])).toEqual([
     10,
     "/",
