@@ -7,6 +7,7 @@ import catcher from "./catcher";
 import validate from "./validate";
 import { checkGameRules } from "./checkGameRules";
 import normalize from "./normalize";
+import fromStringToNumberOperatorArray from "./fromStringToNumberOperatorArray";
 
 // TODO Make it choosable
 const DIFFICULTY = "normal";
@@ -30,6 +31,9 @@ const calculate = (rawEquation) => {
       "Damn! You are a hacker, equation does not follow the rules"
     );
   }
+
+  const equationSeparatedForCalculation =
+    fromStringToNumberOperatorArray(equation);
 
   return "MUST FAIL! NOT IMPLEMENTED!";
 };

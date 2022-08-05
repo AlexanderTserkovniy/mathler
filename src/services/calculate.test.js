@@ -6,7 +6,14 @@
 import equations from "../config/equations.json";
 import calculate from "./calculate";
 
+// There are expected errors
+const errorMock = jest.spyOn(console, "error").mockImplementation();
+
 describe("`calculate` function", () => {
+  afterAll(() => {
+    errorMock.mockRestore();
+  });
+
   test("does calculation of a real equation", () => {
     expect(calculate(equations.equations[0].raw)).toEqual(
       equations.equations[0].result
