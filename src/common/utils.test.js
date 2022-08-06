@@ -117,4 +117,12 @@ describe("utilities", () => {
     expect(getMinValidIndex([0, -1])).toEqual(0);
     expect(getMinValidIndex([-1, -1, 1, 2, 99, 0])).toEqual(0);
   });
+
+  test("getMinValidIndex returns incorrect values if input is corrupted", () => {
+    expect(getMinValidIndex([-1, -1])).toEqual(Infinity);
+    expect(getMinValidIndex([-1])).toEqual(Infinity);
+    expect(getMinValidIndex([])).toEqual(Infinity);
+    // noinspection JSConsecutiveCommasInArrayLiteral
+    expect(getMinValidIndex([-1, -1, -1, -1, , , , , -1])).toEqual(Infinity);
+  });
 });
