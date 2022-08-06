@@ -51,6 +51,11 @@ const calculate = (rawEquation) => {
     equationWithCalculatedDivisionAndMultiplication
   );
 
+  // final validation, there must be only 1 element
+  if (equationWithCalculatedAdditionAndSubtraction.length > 1) {
+    throw new Error("Unexpected error, please contact author!");
+  }
+
   return equationWithCalculatedAdditionAndSubtraction[0];
 };
 
