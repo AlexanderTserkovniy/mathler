@@ -1,27 +1,24 @@
-// TODO Write array of rules alike [Number.isSafeInteger, Number.isFinite, isNumber] etc.
+// https://regexr.com/6rbd8
+// noinspection RegExpSingleCharAlternation
+const INCORRECT_INPUT_REG_EXP =
+  /[+/*]{2}|(\+|\/|\*){2}|[+/*-]+$|^[+/*]+|^-{2}|-{2}$|-{3}|(,|\.)|[^\d/*+-]/g;
+const ERROR_INCORRECT_INPUT = new Error("Incorrect input");
 /**
- * @description EVIL `eval` approach for now, but that is fast and working
- *  solution to validate
+ * @description validates equation, expects reasonable input. WARN! Does not
+ *  actually run the equation, because that's what the whole codebase does...
  * @param equation {string} some equation or its absence, but in a string format
  */
 const validate = (equation) => {
-  let result;
-  try {
-    result = eval(equation);
-  } catch (e) {
-    throw e;
+  // covers undefined, null, 0, false, '' etc.
+  if (!equation) {
+    throw ERROR_INCORRECT_INPUT;
   }
 
-  return (
-    // it must be a number
-    typeof result === "number" &&
-    // it must not be equal to NaN
-    Number.isNaN(result) === false &&
-    // it must be lower than BigInt
-    Number.isSafeInteger(result) &&
-    // it must not contain floating-point
-    Number.isInteger(result)
-  );
+  if (equation.match(INCORRECT_INPUT_REG_EXP)) {
+    throw ERROR_INCORRECT_INPUT;
+  }
+
+  return true;
 };
 
 export default validate;

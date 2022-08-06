@@ -60,4 +60,20 @@ describe("`calculate` function", () => {
       "Damn! You are a hacker, equation does not follow the rules"
     );
   });
+
+  test("works with 'good' 0 cases", () => {
+    expect(calculate("0*-0*0")).toEqual(-0);
+  });
+
+  test("does not work with bad 0 cases", () => {
+    expect(() => calculate("0*0/-0")).toThrow(
+      "This equation cannot be calculated: NaN"
+    );
+  });
+
+  test("does not work with bad division cases", () => {
+    expect(() => calculate("1/0+-2")).toThrow(
+      "This equation cannot be calculated: Infinity+-2"
+    );
+  });
 });
