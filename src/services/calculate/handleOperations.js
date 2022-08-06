@@ -7,7 +7,7 @@ import {
   getMinValidIndex,
   isOperatorOrIsNumber,
   operation,
-} from "../common/utils";
+} from "../../common/utils";
 
 /**
  *

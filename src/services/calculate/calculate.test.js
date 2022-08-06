@@ -3,7 +3,7 @@
  * kemperomg@gmail.com
  */
 
-import equations from "../config/equations.json";
+import equations from "../../config/equations.json";
 import calculate from "./calculate";
 
 // There are expected errors

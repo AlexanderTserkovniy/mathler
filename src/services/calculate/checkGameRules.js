@@ -1,4 +1,4 @@
-import rulesJson from "../config/rules.json";
+import rulesJson from "../../config/rules.json";
 
 const validator = {
   length: (rule, str) => str.length === rule,

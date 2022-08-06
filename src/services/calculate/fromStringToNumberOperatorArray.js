@@ -7,7 +7,7 @@ import {
   EQUATION_REG_EXP,
   MINUS_REG_EXP,
   MINUS_WRAPPER,
-} from "../common/constants";
+} from "../../common/constants";
 
 /*
   as example let's take the '18/9--100' equation
