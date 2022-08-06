@@ -3,7 +3,7 @@
  * kemperomg@gmail.com
  */
 
-import { isNumber } from "../../common/utils";
+import { isNumber } from "../../common/js/utils";
 
 /**
  *

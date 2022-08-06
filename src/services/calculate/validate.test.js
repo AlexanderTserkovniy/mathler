@@ -13,7 +13,6 @@ describe("`validate` function checks syntax", () => {
     expect(() => validate("20.1+1")).toThrow();
     expect(() => validate("2---10")).toThrow();
     expect(() => validate("---10*1")).toThrow();
-    expect(() => validate("---10*1")).toThrow();
     expect(() => validate("1/7**2")).toThrow();
     expect(() => validate("10/70-")).toThrow();
     expect(() => validate("*10/70")).toThrow();

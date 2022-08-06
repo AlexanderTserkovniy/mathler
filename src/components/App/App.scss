@@ -1,47 +1,22 @@
-@use "common/variables.scss";
-
-$app-header-elements-size: calc(#{variables.$header-height} / 2);
+@use "../../common/styles/theme/dark";
+@use "../../common/styles/theme/light";
 
 .App {
   text-align: center;
-  background-color: #282c34;
   height: 100%;
 }
 
-.App-logo {
-  height: $app-header-elements-size;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+// theme
+body.dark {
+  & .App {
+    background-color: dark.$bg;
+    color: dark.$text;
   }
 }
 
-.App-header {
-  height: variables.$header-height;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-.App-name {
-  font-size: $app-header-elements-size;
-  margin: 0;
-  padding: 0;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+body.light {
+  & .App {
+    background-color: light.$bg;
+    color: light.$text;
   }
 }

@@ -64,3 +64,24 @@ export const getMinValidIndex = (arr) =>
     Math,
     arr.filter((inx) => inx > -1)
   );
+
+export const typeOf = (x) =>
+  Object.prototype.toString.call(x).slice(8, -1).toLowerCase();
+
+export const isObject = (x) => typeOf(x) === "object";
+
+export const intersection = (arr1, arr2) => {
+  const arrMap =
+    arr1.length > arr2.length
+      ? { iterateOn: arr1, checkOn: arr2 }
+      : { iterateOn: arr2, checkOn: arr1 };
+
+  return arrMap.iterateOn.filter((arrItem) => arrMap.checkOn.includes(arrItem));
+};
+
+export const doObjectsHaveSameKeys = (objA, objB) =>
+  isObject(objA) &&
+  isObject(objB) &&
+  intersection(Object.keys(objA), Object.keys(objB)).length ===
+    Object.keys(objA).length &&
+  Object.keys(objA).length === Object.keys(objB).length;

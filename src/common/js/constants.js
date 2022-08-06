@@ -16,3 +16,9 @@ export const EQUATION_REG_EXP = new RegExp(
   `-?\\d+|[/*+]|${MINUS_WRAPPER_REG_EXP}`,
   "g"
 );
+
+export const THEME = {
+  key: "theme",
+  dark: "dark",
+  light: "light",
+};

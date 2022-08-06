@@ -1,0 +1,19 @@
+/**
+ * Created by Oleksandr Tserkovnyi on 06.08.2022.
+ * kemperomg@gmail.com
+ */
+
+@use "../../common/styles/theme/dark";
+@use "../../common/styles/theme/light";
+
+body.dark {
+  .ThemeSwitcherActivator {
+    color: dark.$link;
+  }
+}
+
+body.light {
+  .ThemeSwitcherActivator {
+    color: light.$link;
+  }
+}

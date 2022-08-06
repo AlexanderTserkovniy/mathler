@@ -1,0 +1,39 @@
+@use "../../common/styles/variables";
+
+$app-header-elements-size: calc(#{variables.$header-height} / 2);
+
+.AppHeader {
+  height: variables.$header-height;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3vw;
+
+  &-logo {
+    height: $app-header-elements-size;
+    pointer-events: none;
+  }
+
+  &-name {
+    font-size: $app-header-elements-size;
+    margin: 0;
+    padding: 0;
+    flex: 1;
+  }
+}
+
+// some animation, which I just left from create react app
+@media (prefers-reduced-motion: no-preference) {
+  .AppHeader-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

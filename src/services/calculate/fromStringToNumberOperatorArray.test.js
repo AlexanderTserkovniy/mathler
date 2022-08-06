@@ -3,7 +3,7 @@ import fromStringToNumberOperatorArray, {
   unwrapMinuses,
   wrapMinuses,
 } from "./fromStringToNumberOperatorArray";
-import { MINUS_WRAPPER } from "../../common/constants";
+import { MINUS_WRAPPER } from "../../common/js/constants";
 
 test("`fromStringToNumberOperatorArray` function should generate an array of operators and numbers entities as strings", () => {
   expect(fromStringToNumberOperatorArray("10/4*-4")).toEqual([
