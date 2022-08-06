@@ -24,6 +24,26 @@ describe("`calculate` function", () => {
     expect(calculate("10/2+9")).toEqual(14);
   });
 
+  test("follows the order of operations", () => {
+    expect(calculate("10+5/5")).toEqual(11);
+  });
+
+  test("does calculation of negative numbers", () => {
+    expect(calculate("-5/5+9")).toEqual(8);
+  });
+
+  test("does simple calculation of negative numbers", () => {
+    expect(calculate("-5+5+1")).toEqual(1);
+  });
+
+  test("works with 0", () => {
+    expect(calculate("-5+5+0")).toEqual(0);
+  });
+
+  test("works with 0 as multiplication", () => {
+    expect(calculate("-5+5*0")).toEqual(0);
+  });
+
   test("must return an Error if equation is incorrect", () => {
     expect(() => calculate("10/29*")).toThrow("Incorrect equation");
     expect(() => calculate("--10/7")).toThrow("Incorrect equation");
