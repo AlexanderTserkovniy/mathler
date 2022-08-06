@@ -16,6 +16,8 @@ export const EQUATION_REG_EXP = new RegExp(
   `-?\\d+|[/*+]|${MINUS_WRAPPER_REG_EXP}`,
   "g"
 );
+// ONLY UI regexp to validate inputs
+export const UI_EQUATION_REG_EXP = "-?\\d+|[/*+-]";
 
 export const THEME = {
   key: "theme",

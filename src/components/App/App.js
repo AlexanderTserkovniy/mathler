@@ -11,7 +11,7 @@ const App = () => (
       <EquationTask />
 
       <section>
-        <EquationGrid length={6} tries={6} />
+        <EquationGrid x={6} y={6} />
       </section>
 
       <p>Hardcoded example:</p>

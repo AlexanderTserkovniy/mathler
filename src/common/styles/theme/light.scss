@@ -1,3 +1,9 @@
-$text: #282c34;
-$bg: whitesmoke;
-$link: #2231af;
+@use "../colors";
+
+$text: colors.$dark;
+$bg: colors.$white;
+$link: colors.$blue;
+$tint: colors.$smoke;
+$valid: linear-gradient(137deg, #f5f5f5 15%, green);
+$almost: linear-gradient(137deg, #ffffff 15%, #ffff00);
+$invalid: linear-gradient(137deg, #eaeaea 15%, #c45d5d);

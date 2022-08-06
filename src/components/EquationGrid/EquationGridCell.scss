@@ -1,0 +1,68 @@
+@use "../../common/styles/theme/dark";
+@use "../../common/styles/theme/light";
+@use "../../common/styles/transition";
+@use "../../common/styles/colors";
+
+.EquationGridCell {
+  width: 40px;
+  height: 30px;
+  margin: 5px;
+
+  text-align: center;
+  font-family: monospace, monospace;
+  font-size: 1.25rem;
+  font-weight: bold;
+
+  border: none;
+  border-radius: 5px;
+
+  &.valid,
+  &.almost,
+  &.invalid {
+    border-radius: 15px;
+  }
+
+  &:invalid {
+    outline: 1px colors.$error solid;
+  }
+
+  transition: transition.$default;
+}
+
+body.dark {
+  .EquationGridCell {
+    background: dark.$tint;
+    color: dark.$text;
+
+    &.valid {
+      background: dark.$valid;
+    }
+
+    &.almost {
+      background: dark.$almost;
+    }
+
+    &.invalid {
+      background: dark.$invalid;
+    }
+  }
+}
+
+body.light {
+  .EquationGridCell {
+    background: light.$tint;
+    color: light.$text;
+
+    &.valid {
+      background: light.$valid;
+    }
+
+    &.almost {
+      background: light.$almost;
+    }
+
+    &.invalid {
+      background: light.$invalid;
+    }
+  }
+}
