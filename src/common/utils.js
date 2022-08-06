@@ -53,7 +53,14 @@ export const operation = (operator, arr, indexFrom) => {
   // no return because IT MUTATES original array! It's made on purpose.
 };
 
-export const divide = operation.bind(null, "/");
-export const multiply = operation.bind(null, "*");
-export const add = operation.bind(null, "+");
-export const subtract = operation.bind(null, "-");
+/**
+ *
+ * @param arr {number[]} index array like [1, -1, 3, 2], must be
+ *  tuple<number, number>
+ * @returns {number} minimum index, which is greater than -1
+ */
+export const getMinValidIndex = (arr) =>
+  Math.min.apply(
+    Math,
+    arr.filter((inx) => inx > -1)
+  );

@@ -1,13 +1,10 @@
 import {
-  add,
-  divide,
+  getMinValidIndex,
   isDivisionOrMultiplyOperator,
   isNumber,
   isOperator,
   isOperatorOrIsNumber,
-  multiply,
   operation,
-  subtract,
 } from "./utils";
 
 describe("utilities", () => {
@@ -95,21 +92,6 @@ describe("utilities", () => {
     expect(originalArray).toEqual([8]);
   });
 
-  test("`add`, `divide`, `multiply`, `subtract` must do what they should do", () => {
-    const divideArr = [6, "/", 2];
-    divide(divideArr, 1);
-    expect(divideArr).toEqual([3]);
-    const multiplyArr = [6, "*", 2];
-    multiply(multiplyArr, 1);
-    expect(multiplyArr).toEqual([12]);
-    const addArr = [6, "+", 2];
-    add(addArr, 1);
-    expect(addArr).toEqual([8]);
-    const subtractArr = [6, "-", 2];
-    subtract(subtractArr, 1);
-    expect(subtractArr).toEqual([4]);
-  });
-
   test("isOperatorOrIsNumber", () => {
     expect(isOperatorOrIsNumber(20)).toEqual(true);
     expect(isOperatorOrIsNumber(-20)).toEqual(true);
@@ -127,5 +109,12 @@ describe("utilities", () => {
     expect(isOperatorOrIsNumber(undefined)).toEqual(false);
     expect(isOperatorOrIsNumber("NaN10")).toEqual(false);
     expect(isOperatorOrIsNumber("10NaN")).toEqual(false);
+  });
+
+  test("getMinValidIndex returns indexes greater than -1", () => {
+    expect(getMinValidIndex([-1, 2])).toEqual(2);
+    expect(getMinValidIndex([3, -1, 2, 1])).toEqual(1);
+    expect(getMinValidIndex([0, -1])).toEqual(0);
+    expect(getMinValidIndex([-1, -1, 1, 2, 99, 0])).toEqual(0);
   });
 });

@@ -3,7 +3,11 @@
  * kemperomg@gmail.com
  */
 
-import { divide, isOperatorOrIsNumber, multiply } from "../common/utils";
+import {
+  getMinValidIndex,
+  isOperatorOrIsNumber,
+  operation,
+} from "../common/utils";
 
 /**
  *
@@ -27,20 +31,20 @@ const calculateDivisionAndMultiplication = (equationArrayWithNumbers) => {
     return equationArrayWithNumbers;
   }
 
+  const firstOperationIndexToProcess = getMinValidIndex([
+    multiplicationIndex,
+    divisionIndex,
+  ]);
+
   // WARN! It will be mutated!
   const clone = equationArrayWithNumbers.slice();
 
-  // if there is division symbol, conduct it
-  if (divisionIndex >= 0) {
-    // WARN! On purpose mutation!
-    divide(clone, divisionIndex);
-  }
-
-  // if there is multiplication symbol, conduct it
-  if (multiplicationIndex >= 0) {
-    // WARN! On purpose mutation!
-    multiply(clone, multiplicationIndex);
-  }
+  // WARN! On purpose mutation!
+  operation(
+    clone[firstOperationIndexToProcess],
+    clone,
+    firstOperationIndexToProcess
+  );
 
   return calculateDivisionAndMultiplication(clone);
 };

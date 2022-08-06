@@ -56,6 +56,81 @@ describe("`calculateDivisionAndMultiplication` function should receive an array 
     ).toEqual([4.25]);
   });
 
+  test("calculates division and multiplication in the written order", () => {
+    expect(calculateDivisionAndMultiplication([17, "*", 5, "/", 5])).toEqual([
+      17,
+    ]);
+    expect(calculateDivisionAndMultiplication([17, "/", 5, "*", 15])).toEqual([
+      51,
+    ]);
+  });
+
+  test("calculates division and multiplication in the written order more long", () => {
+    expect(
+      calculateDivisionAndMultiplication([
+        17,
+        "*",
+        5,
+        "/",
+        5,
+        "*",
+        3,
+        "*",
+        2,
+        "/",
+        34,
+      ])
+    ).toEqual([3]);
+    expect(
+      calculateDivisionAndMultiplication([
+        25,
+        "/",
+        5,
+        "*",
+        5,
+        "/",
+        2,
+        "*",
+        2,
+        "/",
+        5,
+      ])
+    ).toEqual([5]);
+  });
+
+  test("calculates division and multiplication the written in order more long and do not touch other operators", () => {
+    expect(
+      calculateDivisionAndMultiplication([
+        17,
+        "*",
+        5,
+        "/",
+        5,
+        "-",
+        3,
+        "*",
+        2,
+        "/",
+        6,
+      ])
+    ).toEqual([17, "-", 1]);
+    expect(
+      calculateDivisionAndMultiplication([
+        25,
+        "/",
+        5,
+        "+",
+        5,
+        "/",
+        2,
+        "*",
+        2,
+        "-",
+        5,
+      ])
+    ).toEqual([5, "+", 5, "-", 5]);
+  });
+
   test('does nothing if there is no division "/" or multiplication "*"', () => {
     expect(calculateDivisionAndMultiplication([2, "-", 4, "+", 5])).toEqual([
       2,
