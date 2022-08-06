@@ -51,7 +51,7 @@ const calculate = (rawEquation) => {
     equationWithCalculatedDivisionAndMultiplication
   );
 
-  return "MUST FAIL! NOT IMPLEMENTED!";
+  return equationWithCalculatedAdditionAndSubtraction[0];
 };
 
 export default calculate;

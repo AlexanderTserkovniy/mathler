@@ -41,7 +41,7 @@ describe("`calculate` function", () => {
   });
 
   test("works with 0 as multiplication", () => {
-    expect(calculate("-5+5*0")).toEqual(0);
+    expect(calculate("-5+5*0")).toEqual(-5);
   });
 
   test("must return an Error if equation is incorrect", () => {
