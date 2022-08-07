@@ -16,7 +16,10 @@ const GameContext = React.createContext();
 const defaultDifficulty = "normal";
 const defaultState = {
   currentDifficulty: defaultDifficulty,
-  currentTask: normalize(equations.equations[0]),
+  currentTask: {
+    ...equations.equations[0],
+    task: normalize(equations.equations[0].raw),
+  },
   activeRow: 0,
   rules: rules.difficulties[defaultDifficulty],
 
@@ -56,8 +59,6 @@ function gameReducer(state, action) {
           : nextEmptyCell > -1
           ? nextEmptyCell
           : null;
-
-      console.log("newActiveCell", newActiveCell);
 
       return {
         ...state,
