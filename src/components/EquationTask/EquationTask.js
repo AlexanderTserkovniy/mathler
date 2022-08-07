@@ -4,13 +4,15 @@
  */
 
 import "./EquationTask.scss";
+import { useGame } from "../../context/game";
 
 const EquationTask = () => {
-  // use context to get current task
+  const { state } = useGame();
   return (
     <header>
       <h2 className="EquationTask-heading">
-        Find the hidden calculation that equals {}
+        <span>Find the hidden calculation that equals </span>
+        <span className="EquationTask-number">{state.currentTask.result}</span>
       </h2>
     </header>
   );

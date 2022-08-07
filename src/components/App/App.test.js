@@ -1,11 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 import { ThemeProvider } from "../../context/theme";
+import { GameProvider } from "../../context/game";
 
 test("renders app name", () => {
   render(
     <ThemeProvider>
-      <App />
+      <GameProvider>
+        <App />
+      </GameProvider>
     </ThemeProvider>
   );
   const appName = screen.getByText(/Mathler/i);

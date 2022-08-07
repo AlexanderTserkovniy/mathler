@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "./context/theme";
+import { GameProvider } from "./context/game";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-      <App />
+      <GameProvider>
+        <App />
+      </GameProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

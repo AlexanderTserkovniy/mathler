@@ -3,12 +3,14 @@
     "normal": {
       "length": 6,
       "operators": 2,
-      "enableHighlight": true
+      "enableHighlight": true,
+      "tries": 6
     },
     "killA": {
       "length": 8,
       "operators": 3,
-      "enableHighlight": false
+      "enableHighlight": false,
+      "tries": 6
     }
   }
 }

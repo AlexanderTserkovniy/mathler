@@ -3,6 +3,7 @@
  * kemperomg@gmail.com
  */
 @use "../../common/styles/media";
+@use "../../common/styles/colors";
 
 .EquationTask-heading {
   font-size: 4vw;
@@ -10,4 +11,8 @@
   @media (min-width: #{media.$xs}px) {
     font-size: 1rem;
   }
+}
+
+.EquationTask-number {
+  color: colors.$error;
 }
