@@ -25,6 +25,7 @@ body {
 
       &:active {
         color: dark.$action-activation;
+        background: dark.$action-activation-bg;
       }
 
       &:focus {
@@ -33,6 +34,7 @@ body {
     }
   }
 
+  // TODO Mixin
   &.light {
     .KeyboardButton {
       background: light.$action-bg;
@@ -44,6 +46,7 @@ body {
 
       &:active {
         color: light.$action-activation;
+        background: light.$action-activation-bg;
       }
 
       &:focus {
@@ -52,3 +55,5 @@ body {
     }
   }
 }
+
+// order-bottom: 3px solid bisque;

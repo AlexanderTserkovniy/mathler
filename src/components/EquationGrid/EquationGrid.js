@@ -1,9 +1,9 @@
-import { EquationGridCell } from "./EquationGridCell";
+import EquationGridCell from "./EquationGridCell.game.enhanced";
 import { EquationGridRow } from "./EquationGridRow";
 import { useGame } from "../../context/game";
 
 const EquationGrid = () => {
-  const { state, actions } = useGame();
+  const { state } = useGame();
   const y = state.rules.tries;
   const x = state.rules.length;
   const activeRow = state.activeRow;
@@ -17,6 +17,8 @@ const EquationGrid = () => {
             {cells.map((_, inxCell) => (
               <EquationGridCell
                 key={inxRow + inxCell}
+                index={inxCell}
+                value={state.cellsValues[inxCell]}
                 disabled={inxRow !== activeRow}
                 data-testid="equation-grid-cell"
               />

@@ -4,9 +4,15 @@
  */
 
 import "./KeyboardButton.scss";
+import { useCallback } from "react";
 
-const KeyboardButton = ({ children }) => (
-  <button className="KeyboardButton">{children}</button>
+const KeyboardButton = ({ children, onClick }) => (
+  <button
+    className="KeyboardButton"
+    onClick={useCallback((e) => onClick(children), [children, onClick])}
+  >
+    {children}
+  </button>
 );
 
 export default KeyboardButton;

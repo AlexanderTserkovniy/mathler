@@ -17,17 +17,22 @@
   border: none;
   border-radius: 5px;
 
+  transition: transition.$default;
+
   &.valid,
   &.almost,
   &.invalid {
     border-radius: 15px;
   }
 
+  // to beat the body.dark selector
+  &.is-active.is-active {
+    background: rgba(180, 129, 9, 0.25);
+  }
+
   &:invalid {
     outline: 1px colors.$error solid;
   }
-
-  transition: transition.$default;
 }
 
 body.dark {

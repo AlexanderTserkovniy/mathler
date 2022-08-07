@@ -8,13 +8,11 @@ import { GameProvider } from "./context/game";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <ThemeProvider>
-      <GameProvider>
-        <App />
-      </GameProvider>
-    </ThemeProvider>
-  </React.StrictMode>
+  <ThemeProvider>
+    <GameProvider>
+      <App />
+    </GameProvider>
+  </ThemeProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
