@@ -21,6 +21,11 @@ const EquationGrid = () => {
                 value={state.cellsValues[inxCell]}
                 disabled={inxRow !== activeRow}
                 data-testid="equation-grid-cell"
+                state={
+                  state.history[inxRow]
+                    ? state.history[inxRow][inxCell].state
+                    : null
+                }
               />
             ))}
           </EquationGridRow>

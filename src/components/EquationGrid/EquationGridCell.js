@@ -18,6 +18,7 @@ export const EquationGridCell = memo(
     value,
     index,
     disabled,
+    state,
     ...props
   }) => {
     const inputRef = useRef();
@@ -74,14 +75,12 @@ export const EquationGridCell = memo(
       }
     }, [activeCell, buttonClickErase, buttonClicked]);
 
-    console.log("render");
-
     return (
       <input
         type="text"
         className={`EquationGridCell ${
           !disabled && activeCell === index && "is-active"
-        }`}
+        } ${state}`}
         maxLength={1}
         pattern={UI_EQUATION_REG_EXP}
         ref={inputRef}

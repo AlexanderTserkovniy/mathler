@@ -19,7 +19,7 @@ const Popup = () => {
     if (validation?.isValid === false) {
       tmt = setTimeout(() => {
         actions.setValidation(null);
-      }, 3000);
+      }, 2000);
     }
     return () => clearTimeout(tmt);
   }, [actions, validation?.isValid]);

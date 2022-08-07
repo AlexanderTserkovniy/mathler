@@ -14,26 +14,72 @@ const LOCAL_STORAGE_KEY = "game";
 
 const GameContext = React.createContext();
 
+const getDefaultCells = (length) => new Array(length).fill(null);
 const defaultDifficulty = "normal";
 const defaultState = {
   currentDifficulty: defaultDifficulty,
+  rules: rules.difficulties[defaultDifficulty],
   currentTask: {
     ...equations.equations[0],
     task: normalize(equations.equations[0].raw),
   },
-  activeRow: 0,
-  rules: rules.difficulties[defaultDifficulty],
 
-  cellsValues: new Array(rules.difficulties[defaultDifficulty].length).fill(
-    null
-  ),
-  buttonClicked: null,
+  history: [],
+  cellsValues: getDefaultCells(rules.difficulties[defaultDifficulty].length),
+
+  activeRow: 0,
   activeCell: 0,
   validation: null,
+  buttonClicked: null,
+};
+
+const removeOneFromArr = (arr, elem) => {
+  const firstElemInside = arr.indexOf(elem);
+  const newArr = [...arr];
+  newArr.splice(firstElemInside, 1);
+  return newArr;
 };
 
 const sideEffects = {
-  submit(state, { setValidation }) {
+  matchSigns(task, userInput, { setResult }) {
+    const userInputArr = [...userInput];
+
+    let allValidSymbols = task.match(/[/+*0-9-]/g);
+
+    const userInputWithoutValid = userInputArr.map((symbol, inx) => {
+      const isValid = symbol === task.charAt(inx);
+
+      if (isValid) {
+        allValidSymbols = removeOneFromArr(allValidSymbols, symbol);
+
+        return {
+          state: "valid",
+          value: symbol,
+        };
+      }
+
+      return symbol;
+    });
+
+    const matchResult = userInputWithoutValid.map((symbol, inx) => {
+      if (typeof symbol !== "string") return symbol;
+
+      const isAlmost = allValidSymbols.includes(symbol);
+
+      if (isAlmost) {
+        allValidSymbols = removeOneFromArr(allValidSymbols, symbol);
+      }
+
+      return {
+        state: isAlmost ? "almost" : "invalid",
+        value: symbol,
+      };
+    });
+
+    setResult(matchResult);
+  },
+
+  submit(state, { setValidation, setResult }) {
     console.log("state.cellsValues.join('')", state.cellsValues.join(""));
 
     const toOneString = state.cellsValues.join("");
@@ -45,7 +91,14 @@ const sideEffects = {
       return setValidation({ isValid: false, message: e.message });
     }
 
-    console.log(result);
+    if (result !== state.currentTask.result) {
+      return setValidation({
+        isValid: false,
+        message: `It must be equal to ${state.currentTask.result}`,
+      });
+    }
+
+    sideEffects.matchSigns(state.currentTask.task, toOneString, { setResult });
   },
 };
 
@@ -121,7 +174,7 @@ function gameReducer(state, action) {
       } else if (action.payload === "x Delete all x") {
         return {
           ...state,
-          cellsValues: new Array(state.rules.length).fill(null),
+          cellsValues: getDefaultCells(state.rules.length),
           activeCell: 0,
         };
       }
@@ -137,6 +190,14 @@ function gameReducer(state, action) {
                 isValid: action.payload.isValid,
                 message: action.payload.message,
               },
+      };
+    case "setResult":
+      return {
+        ...state,
+        history: [...state.history, action.payload],
+        cellsValues: getDefaultCells(state.rules.length),
+        activeRow: state.activeRow + 1,
+        activeCell: 0,
       };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
@@ -179,10 +240,33 @@ function GameProvider({ children }) {
     [dispatch]
   );
 
+  const setCellValue = useCallback(
+    (cellIndex, cellValue) => {
+      dispatch({
+        type: "setCellValue",
+        payload: {
+          cellIndex,
+          cellValue,
+        },
+      });
+    },
+    [dispatch]
+  );
+
+  const setResult = useCallback(
+    (matchResult) => {
+      dispatch({
+        type: "setResult",
+        payload: matchResult,
+      });
+    },
+    [dispatch]
+  );
+
   const buttonClick = useCallback(
     (buttonValue) => {
       if (buttonValue === "> Enter") {
-        return sideEffects.submit(state, { setValidation });
+        return sideEffects.submit(state, { setValidation, setResult });
       }
 
       if (buttonValue === "Delete <" || buttonValue === "x Delete all x") {
@@ -200,25 +284,13 @@ function GameProvider({ children }) {
     [dispatch, setValidation, state]
   );
 
-  const setCellValue = useCallback(
-    (cellIndex, cellValue) => {
-      dispatch({
-        type: "setCellValue",
-        payload: {
-          cellIndex,
-          cellValue,
-        },
-      });
-    },
-    [dispatch]
-  );
-
   const actions = {
     buttonClick,
     buttonClickErase,
     setActiveCell,
     setCellValue,
     setValidation,
+    setResult,
   };
 
   const value = { actions, sideEffects, state };
