@@ -102,6 +102,12 @@ function gameReducer(state, action) {
           cellsValues: [...existingCellValues],
           activeCell: nextActiveCell,
         };
+      } else if (action.payload === "x Delete all x") {
+        return {
+          ...state,
+          cellsValues: new Array(state.rules.length).fill(null),
+          activeCell: 0,
+        };
       }
       break;
     }
