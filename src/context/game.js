@@ -281,7 +281,7 @@ function GameProvider({ children }) {
         payload: buttonValue,
       });
     },
-    [dispatch, setValidation, state]
+    [dispatch, setResult, setValidation, state]
   );
 
   const actions = {

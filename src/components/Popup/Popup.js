@@ -24,8 +24,6 @@ const Popup = () => {
     return () => clearTimeout(tmt);
   }, [actions, validation?.isValid]);
 
-  console.log("validation", validation);
-
   const onOk = useCallback(() => actions.setValidation(null), [actions]);
 
   return (
