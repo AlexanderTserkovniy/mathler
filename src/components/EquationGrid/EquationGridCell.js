@@ -16,6 +16,7 @@ export const EquationGridCell = memo(
     buttonClicked,
     activeCell,
     value,
+    historyValue,
     index,
     disabled,
     state,
@@ -68,6 +69,13 @@ export const EquationGridCell = memo(
         inputRef.current.value = value;
       }
     }, [value, disabled]);
+
+    // set value on input from history
+    useEffect(() => {
+      if (historyValue) {
+        inputRef.current.value = historyValue;
+      }
+    }, [historyValue]);
 
     useEffect(() => {
       if (activeCell === null && buttonClicked !== null) {
