@@ -1,9 +1,14 @@
 import Keyboard from "./Keyboard";
 import { render, screen } from "@testing-library/react";
+import { GameProvider } from "../../context/game";
 
 describe("`Keyboard` component", () => {
   test("renders keyboard buttons", () => {
-    render(<Keyboard />);
+    render(
+      <GameProvider>
+        <Keyboard />
+      </GameProvider>
+    );
     const num0 = screen.getByText(/0/i);
     const num5 = screen.getByText(/5/i);
     const num9 = screen.getByText(/9/i);
