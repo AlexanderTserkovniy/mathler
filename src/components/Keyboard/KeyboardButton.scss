@@ -1,0 +1,54 @@
+@use "../../common/styles/font";
+@use "../../common/styles/theme/dark";
+@use "../../common/styles/theme/light";
+
+.KeyboardButton {
+  font-size: 2rem;
+  font-family: font.$code;
+
+  margin: 5px;
+  padding: 0 20px;
+
+  border-radius: 5px;
+  border: 1px solid;
+}
+
+body {
+  &.dark {
+    .KeyboardButton {
+      background: dark.$action-bg;
+      color: dark.$action-text;
+
+      &:hover {
+        box-shadow: 0 0 7px dark.$action-shadow;
+      }
+
+      &:active {
+        color: dark.$action-activation;
+      }
+
+      &:focus {
+        outline: 3px solid dark.$action-activation;
+      }
+    }
+  }
+
+  &.light {
+    .KeyboardButton {
+      background: light.$action-bg;
+      color: dark.$action-text;
+
+      &:hover {
+        box-shadow: 0 0 7px light.$action-shadow;
+      }
+
+      &:active {
+        color: light.$action-activation;
+      }
+
+      &:focus {
+        outline: 3px solid light.$action-activation;
+      }
+    }
+  }
+}

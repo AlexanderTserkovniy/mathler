@@ -2,6 +2,7 @@
 @use "../../common/styles/theme/light";
 @use "../../common/styles/transition";
 @use "../../common/styles/colors";
+@use "../../common/styles/font";
 
 .EquationGridCell {
   width: 40px;
@@ -9,7 +10,7 @@
   margin: 5px;
 
   text-align: center;
-  font-family: monospace, monospace;
+  font-family: font.$code;
   font-size: 1.25rem;
   font-weight: bold;
 
