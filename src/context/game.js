@@ -8,6 +8,7 @@ import { usePersistedReducer } from "./usePersistedReducer";
 import equations from "../config/equations";
 import rules from "../config/rules";
 import normalize from "../services/calculate/normalize";
+import calculate from "../services/calculate/calculate";
 
 const LOCAL_STORAGE_KEY = "game";
 
@@ -28,10 +29,24 @@ const defaultState = {
   ),
   buttonClicked: null,
   activeCell: 0,
+  validation: null,
 };
 
 const sideEffects = {
-  submit() {},
+  submit(state, { setValidation }) {
+    console.log("state.cellsValues.join('')", state.cellsValues.join(""));
+
+    const toOneString = state.cellsValues.join("");
+    let result;
+
+    try {
+      result = calculate(toOneString);
+    } catch (e) {
+      return setValidation({ isValid: false, message: e.message });
+    }
+
+    console.log(result);
+  },
 };
 
 // TODO Move logic from here to wrappers above action dispatchers
@@ -112,6 +127,17 @@ function gameReducer(state, action) {
       }
       break;
     }
+    case "setValidation":
+      return {
+        ...state,
+        validation:
+          action.payload === null
+            ? null
+            : {
+                isValid: action.payload.isValid,
+                message: action.payload.message,
+              },
+      };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -143,13 +169,23 @@ function GameProvider({ children }) {
     });
   }, [dispatch]);
 
+  const setValidation = useCallback(
+    (payload) => {
+      dispatch({
+        type: "setValidation",
+        payload,
+      });
+    },
+    [dispatch]
+  );
+
   const buttonClick = useCallback(
     (buttonValue) => {
-      if (
-        buttonValue === "> Enter" ||
-        buttonValue === "Delete <" ||
-        buttonValue === "x Delete all x"
-      ) {
+      if (buttonValue === "> Enter") {
+        return sideEffects.submit(state, { setValidation });
+      }
+
+      if (buttonValue === "Delete <" || buttonValue === "x Delete all x") {
         return dispatch({
           type: "actionButtonClick",
           payload: buttonValue,
@@ -161,7 +197,7 @@ function GameProvider({ children }) {
         payload: buttonValue,
       });
     },
-    [dispatch]
+    [dispatch, setValidation, state]
   );
 
   const setCellValue = useCallback(
@@ -182,6 +218,7 @@ function GameProvider({ children }) {
     buttonClickErase,
     setActiveCell,
     setCellValue,
+    setValidation,
   };
 
   const value = { actions, sideEffects, state };
