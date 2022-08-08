@@ -49,7 +49,7 @@ const removeOneFromArr = (arr, elem) => {
   return newArr;
 };
 
-const sideEffects = {
+export const sideEffects = {
   setWinLost(matchResult, state, { setFinalResult }) {
     const won = matchResult.every((res) => res.state === "valid");
 
@@ -131,7 +131,7 @@ const sideEffects = {
 };
 
 // TODO Move logic from here to wrappers above action dispatchers
-function gameReducer(state, action) {
+export function gameReducer(state, action) {
   switch (action.type) {
     case "buttonClick":
       return {

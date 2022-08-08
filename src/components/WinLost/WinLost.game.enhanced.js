@@ -1,4 +1,3 @@
-import withGameActions from "../../enhancers/withGameActions";
 import WinLost from "./WinLost";
 import withGameState from "../../enhancers/withGameState";
 import withPopup from "../../enhancers/withPopup";
