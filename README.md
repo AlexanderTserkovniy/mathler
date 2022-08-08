@@ -36,3 +36,8 @@ At some point there will be backend, so it will be managed from there.
 ## Built with
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Known issues
+
+1. If something goes wrong, just clear the localstorage `localStorage.clear()`
+2. DO NOT rotate your phone, body will not be covered with background
