@@ -10,6 +10,12 @@ This section could be the last one, but you might have missed it, so I want to s
 - Many TODOs because it took too long
 - There not appropriate places for some pieces like too much logic in the `EquationGridCell.js` and window action handler in `KeyboardButton.js`, if it took less time I would put it to HOC
 
+# Mobile
+
+Optimized for mobile, only one known issue see **Known issues** section
+
+![Phone screenshot](mobile.jpeg "Phone screenshot")
+
 # Mathler
 
 This is the game, it is built using JavaScript and its libraries for TakeHome of one of the company. Pretty much the same as here https://www.mathler.com/.
