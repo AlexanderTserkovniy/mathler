@@ -6,6 +6,7 @@ import Keyboard from "../Keyboard/Keyboard";
 import Popup from "../Popup/Popup.game.enhanced";
 import WinLost from "../WinLost/WinLost.game.enhanced";
 import Rules from "../Rules/Rules.game.popup.enhanced";
+import StartOver from "../StartOver/StartOver.game.enhanced";
 
 const App = () => (
   <>
@@ -21,6 +22,8 @@ const App = () => (
       </article>
       <footer>
         <Rules />
+        &nbsp; &nbsp; &nbsp;
+        <StartOver />
       </footer>
     </div>
     <Popup />

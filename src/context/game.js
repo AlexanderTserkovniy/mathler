@@ -225,6 +225,11 @@ function gameReducer(state, action) {
         ...state,
         finalResult: action.payload,
       };
+    case "gameRestart":
+      return {
+        ...defaultState,
+        timeStamp: action.payload,
+      };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -299,6 +304,16 @@ function GameProvider({ children }) {
     [dispatch]
   );
 
+  const gameRestart = useCallback(
+    (newTimeStamp) => {
+      dispatch({
+        type: "gameRestart",
+        payload: newTimeStamp,
+      });
+    },
+    [dispatch]
+  );
+
   const buttonClick = useCallback(
     (buttonValue) => {
       if (!!state.finalResult) {
@@ -336,6 +351,7 @@ function GameProvider({ children }) {
     setValidation,
     setResult,
     setFinalResult,
+    gameRestart,
   };
 
   const value = { actions, sideEffects, state };

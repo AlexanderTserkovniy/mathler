@@ -1,0 +1,8 @@
+/**
+ * Created by Oleksandr Tserkovnyi on 07.08.2022.
+ * kemperomg@gmail.com
+ */
+
+@use "../../common/styles/mixins";
+
+@include mixins.link-like(".Activator");

@@ -1,8 +1,7 @@
-import "./RulesActivator.scss";
-import RulesActivator from "./RulesActivator";
 import { useCallback } from "react";
 import RulesContent from "./RulesContent";
 import RulesHeader from "./RulesHeader";
+import Activator from "../Activator/Activator";
 
 /**
  * Created by Oleksandr Tserkovnyi on 07.08.2022.
@@ -18,7 +17,11 @@ export const Rules = ({ rules, popup, setPopupContent }) => {
     });
   }, [setPopupContent, tries]);
 
-  return <RulesActivator onClick={showRules}>show rules</RulesActivator>;
+  return (
+    <Activator action="action:show-rules" onClick={showRules}>
+      show rules
+    </Activator>
+  );
 };
 
 export default Rules;

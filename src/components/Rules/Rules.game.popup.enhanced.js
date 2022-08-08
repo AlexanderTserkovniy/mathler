@@ -1,4 +1,3 @@
-import "./RulesActivator.scss";
 import withPopup from "../../enhancers/withPopup";
 import Rules from "./Rules";
 import withGameState from "../../enhancers/withGameState";

@@ -1,10 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import ThemeSwitcherActivator from "./ThemeSwitcherActivator";
+import Activator from "./Activator";
 
 test("renders children wrapped in the <a> tag", () => {
-  const { container, getByText } = render(
-    <ThemeSwitcherActivator>light</ThemeSwitcherActivator>
-  );
+  const { container, getByText } = render(<Activator>light</Activator>);
   // eslint-disable-next-line testing-library/no-container,testing-library/no-node-access
   const element = container.querySelector("a");
   expect(element).toBeInTheDocument();
@@ -14,11 +12,9 @@ test("renders children wrapped in the <a> tag", () => {
 
 test("should invoke clicks on handler", () => {
   const handler = jest.fn();
-  render(
-    <ThemeSwitcherActivator onClick={handler}>light</ThemeSwitcherActivator>
-  );
-  const themeSwitcherActivator = screen.getByText("light");
-  fireEvent.click(themeSwitcherActivator);
+  render(<Activator onClick={handler}>light</Activator>);
+  const activator = screen.getByText("light");
+  fireEvent.click(activator);
   expect(handler).toBeCalled();
 });
 
@@ -29,10 +25,8 @@ xtest("clicks on it must prevent default", () => {
   const event = {
     preventDefault: preventDefaultHandler,
   };
-  render(
-    <ThemeSwitcherActivator onClick={handler}>light</ThemeSwitcherActivator>
-  );
-  const themeSwitcherActivator = screen.getByText("light");
-  fireEvent(themeSwitcherActivator, new MouseEvent("click", event));
+  render(<Activator onClick={handler}>light</Activator>);
+  const activator = screen.getByText("light");
+  fireEvent(activator, new MouseEvent("click", event));
   expect(preventDefaultHandler).toBeCalled();
 });

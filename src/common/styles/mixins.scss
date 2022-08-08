@@ -1,0 +1,16 @@
+@use "../../common/styles/theme/dark";
+@use "../../common/styles/theme/light";
+
+@mixin link-like($selector) {
+  body.dark {
+    #{$selector} {
+      color: dark.$link;
+    }
+  }
+
+  body.light {
+    #{$selector} {
+      color: light.$link;
+    }
+  }
+}

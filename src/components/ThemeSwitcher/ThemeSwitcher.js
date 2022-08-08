@@ -2,10 +2,10 @@
  * Created by Oleksandr Tserkovnyi on 06.08.2022.
  * kemperomg@gmail.com
  */
-import ThemeSwitcherActivator from "./ThemeSwitcherActivator";
 import { useTheme } from "../../context/theme";
 import { useCallback, useEffect } from "react";
 import { THEME } from "../../common/js/constants";
+import Activator from "../Activator/Activator";
 
 const ThemeSwitcher = () => {
   const theme = useTheme();
@@ -21,9 +21,9 @@ const ThemeSwitcher = () => {
 
   // noinspection HtmlUnknownTarget
   return (
-    <ThemeSwitcherActivator onClick={toggleTheme}>
+    <Activator onClick={toggleTheme} action="action:switch-theme">
       {theme.state.value === THEME.dark ? THEME.light : THEME.dark}
-    </ThemeSwitcherActivator>
+    </Activator>
   );
 };
 

@@ -77,6 +77,13 @@ export const EquationGridCell = memo(
       }
     }, [historyValue]);
 
+    // game reset
+    useEffect(() => {
+      if (isOperatorOrIsNumber(historyValue) === false && disabled) {
+        inputRef.current.value = null;
+      }
+    }, [disabled, historyValue]);
+
     useEffect(() => {
       if (activeCell === null && buttonClicked !== null) {
         buttonClickErase();

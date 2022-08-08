@@ -12,14 +12,17 @@ const KeyboardButton = ({ children, onClick }) => {
   useEffect(() => {
     const fireKey = (e) => {
       if (isOperatorOrIsNumber(e.key)) {
+        e.preventDefault();
         return onClick(e.key);
       }
 
       if (e.keyCode === 13) {
+        e.preventDefault();
         return onClick("> Enter");
       }
 
       if (e.keyCode === 8 || e.keyCode === 46) {
+        e.preventDefault();
         return onClick("Delete <");
       }
     };

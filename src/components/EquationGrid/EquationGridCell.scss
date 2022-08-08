@@ -51,6 +51,10 @@ body.dark {
     &.invalid {
       background: dark.$invalid;
     }
+
+    &:focus {
+      outline: 2px solid dark.$action-activation;
+    }
   }
 }
 
@@ -69,6 +73,10 @@ body.light {
 
     &.invalid {
       background: light.$invalid;
+    }
+
+    &:focus {
+      outline: 2px solid light.$action-activation;
     }
   }
 }
