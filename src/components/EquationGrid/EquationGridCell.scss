@@ -33,6 +33,10 @@
   &:invalid {
     outline: 1px colors.$error solid;
   }
+
+  &:disabled {
+    opacity: 1;
+  }
 }
 
 body.dark {
