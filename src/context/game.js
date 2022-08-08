@@ -301,6 +301,10 @@ function GameProvider({ children }) {
 
   const buttonClick = useCallback(
     (buttonValue) => {
+      if (!!state.finalResult) {
+        return false;
+      }
+
       if (buttonValue === "> Enter") {
         return sideEffects.submit(state, {
           setValidation,

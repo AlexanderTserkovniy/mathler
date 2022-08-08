@@ -7,6 +7,7 @@ const EquationGrid = () => {
   const y = state.rules.tries;
   const x = state.rules.length;
   const activeRow = state.activeRow;
+  const hasWonOrLost = !!state.finalResult;
 
   return (
     <section>
@@ -24,7 +25,7 @@ const EquationGrid = () => {
                     : null
                 }
                 value={state.cellsValues[inxCell]}
-                disabled={inxRow !== activeRow}
+                disabled={inxRow !== activeRow || hasWonOrLost}
                 data-testid="equation-grid-cell"
                 state={
                   state.history?.[inxRow]
