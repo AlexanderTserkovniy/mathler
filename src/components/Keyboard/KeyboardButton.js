@@ -4,15 +4,37 @@
  */
 
 import "./KeyboardButton.scss";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
+import { isOperatorOrIsNumber } from "../../common/js/utils";
 
-const KeyboardButton = ({ children, onClick }) => (
-  <button
-    className="KeyboardButton"
-    onClick={useCallback((e) => onClick(children), [children, onClick])}
-  >
-    {children}
-  </button>
-);
+const KeyboardButton = ({ children, onClick }) => {
+  // TODO Move it from component
+  useEffect(() => {
+    const fireKey = (e) => {
+      if (isOperatorOrIsNumber(e.key)) {
+        return onClick(e.key);
+      }
+
+      if (e.keyCode === 13) {
+        return onClick("> Enter");
+      }
+
+      if (e.keyCode === 8 || e.keyCode === 46) {
+        return onClick("Delete <");
+      }
+    };
+    window.addEventListener("keydown", fireKey);
+    return () => window.removeEventListener("keydown", fireKey);
+  }, [onClick]);
+
+  return (
+    <button
+      className="KeyboardButton"
+      onClick={useCallback((e) => onClick(children), [children, onClick])}
+    >
+      {children}
+    </button>
+  );
+};
 
 export default KeyboardButton;
