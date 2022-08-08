@@ -5,12 +5,15 @@ import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "./context/theme";
 import { GameProvider } from "./context/game";
+import { PopupProvider } from "./context/popup";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ThemeProvider>
     <GameProvider>
-      <App />
+      <PopupProvider>
+        <App />
+      </PopupProvider>
     </GameProvider>
   </ThemeProvider>
 );

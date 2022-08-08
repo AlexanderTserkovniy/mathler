@@ -4,35 +4,24 @@
  */
 
 import "./Popup.scss";
-import { useGame } from "../../context/game";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback } from "react";
 import Button from "../Button/Button";
 
-const Popup = () => {
-  const { state, actions } = useGame();
-  const validation = useMemo(() => {
-    return state.validation;
-  }, [state.validation]);
+const Popup = ({ popup, setPopupContent, onOkCallback }) => {
+  const onOk = useCallback(() => {
+    setPopupContent(null);
+    onOkCallback();
+  }, [onOkCallback, setPopupContent]);
 
-  useEffect(() => {
-    let tmt;
-    if (validation?.isValid === false) {
-      tmt = setTimeout(() => {
-        actions.setValidation(null);
-      }, 2000);
-    }
-    return () => clearTimeout(tmt);
-  }, [actions, validation?.isValid]);
-
-  const onOk = useCallback(() => actions.setValidation(null), [actions]);
+  const popupContent = popup.value?.content;
+  const popupHeader = popup.value?.header;
 
   return (
-    <section
-      className={`Popup ${validation?.isValid === false && "is-active"}`}
-    >
-      {validation && (
+    <section className={`Popup ${popup.value && "is-active"}`}>
+      {popup.value && (
         <article className="Popup-content">
-          <header className="Popup-content-header">{validation.message}</header>
+          <header className="Popup-content-header">{popupHeader}</header>
+          <article>{popupContent}</article>
           <footer>
             <Button onClick={onOk}>OK</Button>
           </footer>

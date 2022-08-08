@@ -31,6 +31,8 @@ const defaultState = {
   activeCell: 0,
   validation: null,
   buttonClicked: null,
+
+  finalResult: null,
 };
 
 const removeOneFromArr = (arr, elem) => {
@@ -41,6 +43,19 @@ const removeOneFromArr = (arr, elem) => {
 };
 
 const sideEffects = {
+  setWinLost(matchResult, state, { setFinalResult }) {
+    const won = matchResult.every((res) => res.state === "valid");
+
+    // win condition
+    if (won) {
+      return setFinalResult("won");
+    }
+
+    if (state.activeRow >= state.rules.tries - 1) {
+      return setFinalResult("lost");
+    }
+  },
+
   matchSigns(task, userInput, { setResult }) {
     const userInputArr = [...userInput];
 
@@ -77,11 +92,11 @@ const sideEffects = {
     });
 
     setResult(matchResult);
+
+    return matchResult;
   },
 
-  submit(state, { setValidation, setResult }) {
-    console.log("state.cellsValues.join('')", state.cellsValues.join(""));
-
+  submit(state, { setValidation, setResult, setFinalResult }) {
     const toOneString = state.cellsValues.join("");
     let result;
 
@@ -98,7 +113,13 @@ const sideEffects = {
       });
     }
 
-    sideEffects.matchSigns(state.currentTask.task, toOneString, { setResult });
+    const matchResult = sideEffects.matchSigns(
+      state.currentTask.task,
+      toOneString,
+      { setResult }
+    );
+
+    sideEffects.setWinLost(matchResult, state, { setFinalResult });
   },
 };
 
@@ -199,6 +220,11 @@ function gameReducer(state, action) {
         activeRow: state.activeRow + 1,
         activeCell: 0,
       };
+    case "setFinalResult":
+      return {
+        ...state,
+        finalResult: action.payload,
+      };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -263,10 +289,24 @@ function GameProvider({ children }) {
     [dispatch]
   );
 
+  const setFinalResult = useCallback(
+    (result) => {
+      dispatch({
+        type: "setFinalResult",
+        payload: result,
+      });
+    },
+    [dispatch]
+  );
+
   const buttonClick = useCallback(
     (buttonValue) => {
       if (buttonValue === "> Enter") {
-        return sideEffects.submit(state, { setValidation, setResult });
+        return sideEffects.submit(state, {
+          setValidation,
+          setResult,
+          setFinalResult,
+        });
       }
 
       if (buttonValue === "Delete <" || buttonValue === "x Delete all x") {
@@ -281,7 +321,7 @@ function GameProvider({ children }) {
         payload: buttonValue,
       });
     },
-    [dispatch, setResult, setValidation, state]
+    [dispatch, setFinalResult, setResult, setValidation, state]
   );
 
   const actions = {
@@ -291,6 +331,7 @@ function GameProvider({ children }) {
     setCellValue,
     setValidation,
     setResult,
+    setFinalResult,
   };
 
   const value = { actions, sideEffects, state };
