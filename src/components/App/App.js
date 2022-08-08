@@ -7,6 +7,7 @@ import Popup from "../Popup/Popup.game.enhanced";
 import WinLost from "../WinLost/WinLost.game.enhanced";
 import Rules from "../Rules/Rules.game.popup.enhanced";
 import StartOver from "../StartOver/StartOver.game.enhanced";
+import PlayNext from "../PlayNext/PlayNext.game.enhanced";
 
 const App = () => (
   <>
@@ -24,6 +25,8 @@ const App = () => (
         <Rules />
         &nbsp; &nbsp; &nbsp;
         <StartOver />
+        &nbsp; &nbsp; &nbsp;
+        <PlayNext />
       </footer>
     </div>
     <Popup />

@@ -11,7 +11,10 @@ const KeyboardButton = ({ children, onClick }) => {
   // TODO Move it from component
   useEffect(() => {
     const fireKey = (e) => {
-      if (isOperatorOrIsNumber(e.key)) {
+      const isEquationGridFocus =
+        document.activeElement?.dataset.testid === "equation-grid-cell";
+
+      if (isOperatorOrIsNumber(e.key) && !isEquationGridFocus) {
         e.preventDefault();
         return onClick(e.key);
       }
@@ -21,7 +24,7 @@ const KeyboardButton = ({ children, onClick }) => {
         return onClick("> Enter");
       }
 
-      if (e.keyCode === 8 || e.keyCode === 46) {
+      if ((e.keyCode === 8 || e.keyCode === 46) && !isEquationGridFocus) {
         e.preventDefault();
         return onClick("Delete <");
       }

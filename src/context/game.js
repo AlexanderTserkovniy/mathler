@@ -16,12 +16,19 @@ const GameContext = React.createContext();
 
 const getDefaultCells = (length) => new Array(length).fill(null);
 const defaultDifficulty = "normal";
+// TODO Move somewhere
+const currentEquationIndex = Number(
+  localStorage.getItem("currentEquationIndex") || 0
+);
+if (!localStorage.getItem("currentEquationIndex")) {
+  localStorage.setItem("currentEquationIndex", 0);
+}
 const defaultState = {
   currentDifficulty: defaultDifficulty,
   rules: rules.difficulties[defaultDifficulty],
   currentTask: {
-    ...equations.equations[0],
-    task: normalize(equations.equations[0].raw),
+    ...equations.equations[currentEquationIndex],
+    task: normalize(equations.equations[currentEquationIndex].raw),
   },
 
   history: [],
@@ -230,6 +237,14 @@ function gameReducer(state, action) {
         ...defaultState,
         timeStamp: action.payload,
       };
+    case "setNextChallenge":
+      return {
+        ...state,
+        currentTask: {
+          ...action.payload,
+          task: normalize(action.payload.raw),
+        },
+      };
     default: {
       throw new Error(`Unhandled action type: ${action.type}`);
     }
@@ -314,6 +329,16 @@ function GameProvider({ children }) {
     [dispatch]
   );
 
+  const setNextChallenge = useCallback(
+    (equationChallenge) => {
+      dispatch({
+        type: "setNextChallenge",
+        payload: equationChallenge,
+      });
+    },
+    [dispatch]
+  );
+
   const buttonClick = useCallback(
     (buttonValue) => {
       if (!!state.finalResult) {
@@ -352,6 +377,7 @@ function GameProvider({ children }) {
     setResult,
     setFinalResult,
     gameRestart,
+    setNextChallenge,
   };
 
   const value = { actions, sideEffects, state };
