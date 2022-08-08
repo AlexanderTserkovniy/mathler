@@ -1,0 +1,21 @@
+@use "../../common/styles/theme/dark";
+@use "../../common/styles/theme/light";
+
+.RulesContent {
+  ul {
+    margin: 10px 0 0 20px;
+    padding: 0;
+  }
+
+  li {
+    margin: 10px 0;
+  }
+}
+
+.dark .RulesContent {
+  color: dark.$text;
+}
+
+.light .RulesContent {
+  color: light.$text;
+}

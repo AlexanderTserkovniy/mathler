@@ -1,0 +1,14 @@
+@use "../../common/styles/theme/dark";
+@use "../../common/styles/theme/light";
+
+body.dark {
+  .RulesActivator {
+    color: dark.$link;
+  }
+}
+
+body.light {
+  .RulesActivator {
+    color: light.$link;
+  }
+}

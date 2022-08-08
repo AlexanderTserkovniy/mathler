@@ -6,7 +6,7 @@
 import "./EquationGridCell.scss";
 import { UI_EQUATION_REG_EXP } from "../../common/js/constants";
 import { memo, useCallback, useEffect, useRef } from "react";
-import { isNumber } from "../../common/js/utils";
+import { isNumber, isOperatorOrIsNumber } from "../../common/js/utils";
 
 export const EquationGridCell = memo(
   ({
@@ -72,7 +72,7 @@ export const EquationGridCell = memo(
 
     // set value on input from history
     useEffect(() => {
-      if (historyValue) {
+      if (isOperatorOrIsNumber(historyValue)) {
         inputRef.current.value = historyValue;
       }
     }, [historyValue]);
